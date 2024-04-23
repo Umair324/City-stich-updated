@@ -1,7 +1,8 @@
 import {
   Flex,
   Text,
-  Image
+  Image,
+  Box
 } from '@chakra-ui/react';
 import { useNavigate } from 'react-router-dom';
 import options from './options';
@@ -26,7 +27,9 @@ const Sidebar = ({
         paddingInline={4}
         height={'100%'}
       >
-        <Logo width={100} height={100} />
+      <Flex justifyContent={'center'}>
+        <Logo width={'90%'} height={'100%'} />
+      </Flex>
         <Flex
           direction='column'
           width={'100%'}

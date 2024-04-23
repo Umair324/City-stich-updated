@@ -5,11 +5,16 @@ import {
   Box,
   Button,
   Divider,
+  Checkbox,
 } from '@chakra-ui/react';
 import Instruction from '../instruction';
 import CustomInput from '../input';
 import TextArea from '../textarea';
 import CustomSelect from '../select';
+import FormikInput from '../formpikinput';
+import { useFormik } from 'formik';
+import * as Yup from 'yup';
+import CustomCheckbox from '../checkbox';
 
 const Profile = () => {
   const [isSaveDisabled, setIsSaveDisabled] = useState(true);
@@ -24,6 +29,18 @@ const Profile = () => {
   const [sortCode, setSortCode] = useState("");
   const [rejectedOption, setRejectedOption] = useState("Donate to charity")
 
+  const formik = useFormik({
+    initialValues: {
+      date: "",
+      dateReturn: "",
+    },
+    validationSchema: Yup.object({
+      date: Yup.string().required("Collection name cannot be empty"),
+      // description: Yup.string().required("Collection description cannot be empty"),
+      // store: Yup.string().required("Store cannot be empty"),
+    }),
+  });
+
 
   useEffect(() => {
     if (!(
@@ -32,36 +49,36 @@ const Profile = () => {
       surname &&
       address &&
       city &&
-      postcode && 
+      postcode &&
       bankName &&
       accountNumber &&
       sortCode &&
       rejectedOption
-    )){
+    )) {
       setIsSaveDisabled(true);
       return
     }
 
     setIsSaveDisabled(false)
   }, [
-    title, 
+    title,
     firstName,
-    surname, 
-    address, 
-    city, 
-    postcode, 
-    bankName, 
+    surname,
+    address,
+    city,
+    postcode,
+    bankName,
     accountNumber,
-    sortCode, 
+    sortCode,
     rejectedOption
   ]);
 
   const handleCancel = () => {
-    
+
   }
 
   const handleSave = () => {
-    
+
   }
 
   return (
@@ -78,10 +95,10 @@ const Profile = () => {
         </Text>
       </Box>
 
-      <Flex 
+      <Flex
         bg={'#e5e5e5'}
         padding={4}
-        height={'100%'}
+        height={'auto'}
         gap={2}
       >
         <Flex
@@ -100,117 +117,222 @@ const Profile = () => {
               Personal Details
             </Text>
 
-            <Divider 
+            <Divider
               marginBlock={2}
               bg={'black'}
               h={'1px'}
             />
 
             <Flex gap={4} marginTop={4}>
-              <CustomInput 
-                label={'title'}
-                placeholder={'Enter title here'}
-                onChange={setTitle}
+              <FormikInput
+                formik={formik}
+                name='retrunDate'
+                type={'date'}
+                label={'تاریخ واپسی'}
                 labelColor={'black'}
-                labelSize={'8px'}
+                placeholder={'تاریخ واپسی'}
               />
-
-              <CustomInput 
-                label={'first name'}
-                placeholder={'Enter your first name here'}
+              <FormikInput
+                formik={formik}
+                name='date'
+                type={'date'}
+                label={'تاریخ'}
+                labelColor={'black'}
+                placeholder={'تاریخ'}
+              />
+              <CustomInput
+                label={'نام'}
+                placeholder={'نام'}
                 onChange={setFirstName}
                 labelColor={'black'}
-                labelSize={'8px'}
               />
 
-              <CustomInput 
-                label={'surname'}
-                placeholder={'Enter your surname here'}
-                onChange={setSurname}
+              <CustomInput
+                label={'نمبر'}
+                placeholder={'نمبر'}
+                onChange={setTitle}
                 labelColor={'black'}
-                labelSize={'8px'}
               />
             </Flex>
-
-            <TextArea 
-              label={'Address'}
-              labelColor={'black'}
-              placeholder={'Enter your address here'}
-              onChange={setAddress}
-            />
-
-            <Flex gap={4} marginTop={4}>
-              <CustomInput 
-                label={'City'}
-                placeholder={'Enter your city name here'}
-                onChange={setCity}
-                labelColor={'black'}
-                labelSize={'8px'}
-              />
-
-              <CustomInput 
-                label={'Post code'}
-                placeholder={'Enter your post code here'}
-                onChange={setPostcode}
-                labelColor={'black'}
-                labelSize={'8px'}
-              />
-            </Flex>
-
             <Text
               fontFamily={'gothicBold'}
               fontSize={'12px'}
               textTransform={'uppercase'}
             >
-              Bank Details
+              Measurement Details
             </Text>
 
-            <Divider 
+            <Divider
               marginBlock={2}
               bg={'black'}
               h={'1px'}
             />
 
-            <Flex gap={4} marginTop={4}>
-              <CustomInput 
-                label={'Bank Name'}
-                placeholder={'Enter your bank name here'}
-                onChange={setBankName}
-                labelColor={'black'}
-                labelSize={'8px'}
-              />
+            <Flex w={'100%'} gap={4} justifyContent={'flex-end'}>
+              <Flex w={'18%'} marginTop={4} flexDir={'column'}>
+              <Flex paddingBottom={'66px'} mt={'20px'} justifyContent={'center'} paddingRight={'10px'}>
+              <Text fontSize={'16px'} fontWeight={'700'}>پجامہ</Text>
+              </Flex>
+                <CustomInput
+                  label={'لمبائی'}
+                  placeholder={'لمبائی'}
+                  onChange={setBankName}
+                  labelColor={'black'}
+                />
+                <CustomInput
+                  label={'چھانی'}
+                  placeholder={'چھانی'}
+                  onChange={setAccountNumber}
+                  labelColor={'black'}
+                />
+                <CustomInput
+                  label={'ہاسن'}
+                  placeholder={'ہاسن'}
+                  onChange={setAccountNumber}
+                  labelColor={'black'}
+                />
+              </Flex>
+              <Flex w={'18%'} marginTop={4} flexDir={'column'}>
+              <Flex paddingBottom={'66px'} mt={'20px'} justifyContent={'center'} paddingRight={'10px'}>
+              <Text fontSize={'16px'} fontWeight={'700'}>شلوار</Text>
+              </Flex>
+                <CustomInput
+                  label={'لمبائی'}
+                  placeholder={'لمبائی'}
+                  onChange={setBankName}
+                  labelColor={'black'}
+                />
+                <CustomInput
+                  label={'ہازا'}
+                  placeholder={'ہازا'}
+                  onChange={setAccountNumber}
+                  labelColor={'black'}
+                />
+                <CustomInput
+                  label={'گہیر'}
+                  placeholder={'گہیر'}
+                  onChange={setAccountNumber}
+                  labelColor={'black'}
+                />
 
-              <CustomInput 
-                label={'Account Number'}
-                placeholder={'Enter your account number here'}
-                onChange={setAccountNumber}
-                labelColor={'black'}
-                labelSize={'8px'}
-              />
-            </Flex>
+                <CustomInput
+                  label={'ہاسن'}
+                  placeholder={'ہاسن'}
+                  onChange={setAccountNumber}
+                  labelColor={'black'}
+                />
+              </Flex>
+              <Flex w={'18%'} marginTop={4} flexDir={'column'}>
+                <Box mt={'30px'}>
+                  <CustomCheckbox label="آرمول " labelColor="red" labelSize="16px" />
+                </Box>
+                <Box mt={'62px'}>
+                  <CustomCheckbox label="موری" labelColor="red" labelSize="16px" />
+                </Box>
+                <Box mt={'60px'}>
+                  <CustomCheckbox label="آستین گول" labelColor="red" labelSize="16px" />
+                </Box>
+                <Box mt={'62px'}>
+                  <CustomCheckbox label="ٹچ بٹن" labelColor="red" labelSize="16px" />
+                </Box>
+                <Box mt={'60px'}>
+                  <CustomCheckbox label="فینسی بٹن" labelColor="red" labelSize="16px" />
+                </Box>
+                <Box mt={'62px'}>
+                  <CustomCheckbox label="کف چکور" labelColor="red" labelSize="16px" />
+                </Box>
+              </Flex>
+              <Flex w={'18%'} marginTop={4} flexDir={'column'}>
+                <Box mt={'30px'}>
+                  <CustomCheckbox label="ڈبل سلائی" labelColor="red" labelSize="16px" />
+                </Box>
+                <Box mt={'62px'}>
+                  <CustomCheckbox label="سنگل سلائی" labelColor="red" labelSize="16px" />
+                </Box>
+                <Box mt={'60px'}>
+                  <CustomCheckbox label="ڈبل پٹی" labelColor="red" labelSize="16px" />
+                </Box>
+                <Box mt={'62px'}>
+                  <CustomCheckbox label="کفلنگ" labelColor="red" labelSize="16px" />
+                </Box>
+                <Box mt={'60px'}>
+                  <CustomCheckbox label="کف گول" labelColor="red" labelSize="16px" />
+                </Box>
+                <Box mt={'62px'}>
+                  <CustomCheckbox label="کف چکور" labelColor="red" labelSize="16px" />
+                </Box>
+              </Flex>
+              <Flex w={'18%'} marginTop={4} flexDir={'column'}>
+                <CustomInput
+                  label={'کالر'}
+                  placeholder={'کالر'}
+                  onChange={setAccountNumber}
+                  labelColor={'black'}
+                />
+                <CustomInput
+                  label={'شیروانی'}
+                  placeholder={'شیروانی'}
+                  onChange={setAccountNumber}
+                  labelColor={'black'}
+                />
+                <Box mt={'30px'}>
+                  <CustomCheckbox label="داون گول" labelColor="red" labelSize="16px" />
+                </Box>
+                <Box mt={'62px'}>
+                  <CustomCheckbox label="داون چکور" labelColor="red" labelSize="16px" />
+                </Box>
+                <Box mt={'60px'}>
+                  <CustomCheckbox label="فرنٹ جیب" labelColor="red" labelSize="16px" />
+                </Box>
+                <Box mt={'62px'}>
+                  <CustomCheckbox label="سائیڈ پیکٹ" labelColor="red" labelSize="16px" />
+                </Box>
+              </Flex>
+              <Flex w={'18%'} marginTop={4} flexDir={'column'}>
+                <CustomInput
+                  label={'لمبائی'}
+                  placeholder={'لمبائی'}
+                  onChange={setBankName}
+                  labelColor={'black'}
+                />
+                <CustomInput
+                  label={'تیرا'}
+                  placeholder={'تیرا'}
+                  onChange={setAccountNumber}
+                  labelColor={'black'}
+                />
+                <CustomInput
+                  label={'آستین'}
+                  placeholder={'آستین'}
+                  onChange={setAccountNumber}
+                  labelColor={'black'}
+                />
 
-            <Flex gap={4} marginTop={4}>
-              <CustomInput 
-                label={'Sort code'}
-                placeholder={'Enter your sort code here'}
-                onChange={setSortCode}
-                labelColor={'black'}
-                labelSize={'8px'}
-              />
+                <CustomInput
+                  label={'چیست'}
+                  placeholder={'چیست'}
+                  onChange={setAccountNumber}
+                  labelColor={'black'}
+                />
 
-              <CustomSelect 
-                label={"WHAT WOULD YOU LIKE DO WITH REJECTED ITEMS?"}
-                placeholder={"Select an option"}
-                onChange={setRejectedOption}
-                labelColor={'black'}
-                labelSize={'8px'}
-              >
-                <option value="Donate to charity">Donate to charity</option>
-              </CustomSelect>
+                <CustomInput
+                  label={'ویسٹ'}
+                  placeholder={'ویسٹ'}
+                  onChange={setAccountNumber}
+                  labelColor={'black'}
+                />
+                <CustomInput
+                  label={'بامن'}
+                  placeholder={'بامن'}
+                  onChange={setAccountNumber}
+                  labelColor={'black'}
+                />
+
+              </Flex>
             </Flex>
           </Box>
 
-          <Flex 
+          <Flex
             alignSelf={'flex-end'}
             justifyContent={'flex-end'}
             w={'100%'}
