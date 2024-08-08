@@ -5,6 +5,7 @@ import {
   } from '@chakra-ui/react';
   import Instruction from '../instruction';
   import Card from '../card';
+
   
   const Measurement = () => {
     return (
@@ -26,7 +27,7 @@ import {
           padding={4}
           height={'100%'}
         >
-        Peter
+        
         </Flex>
       </Box>
     )

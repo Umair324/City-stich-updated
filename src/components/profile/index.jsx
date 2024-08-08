@@ -5,18 +5,17 @@ import {
   Box,
   Button,
   Divider,
-  Checkbox,
 } from '@chakra-ui/react';
-import Instruction from '../instruction';
-import CustomInput from '../input';
-import TextArea from '../textarea';
-import CustomSelect from '../select';
+// import Instruction from '../instruction';
+import CustomInput from '../input/index';
+// import TextArea from '../textarea';
+// import CustomSelect from '../select';
 import FormikInput from '../formpikinput';
 import { useFormik } from 'formik';
 import * as Yup from 'yup';
 import CustomCheckbox from '../checkbox';
 
-const Profile = () => {
+const Measurements = () => {
   const [isSaveDisabled, setIsSaveDisabled] = useState(true);
   const [title, setTitle] = useState("");
   const [firstName, setFirstName] = useState("");
@@ -376,4 +375,4 @@ const Profile = () => {
   )
 }
 
-export default Profile;
+export default Measurements;

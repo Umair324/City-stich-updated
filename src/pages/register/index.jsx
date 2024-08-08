@@ -12,7 +12,7 @@ import {
 } from '@chakra-ui/react';
 import { useNavigate } from 'react-router-dom';
 import Carousel from '../../components/carousel';
-import CustomInput from '../../components/input';
+import CustomInput from '../../components/input/index';
 import TextArea from '../../components/textarea';
 
 const RegisterPage = () => {
